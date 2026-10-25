@@ -46,12 +46,31 @@ html, body {
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
   background-color: var(--bg-velvet);
   color: var(--cream-white);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Lenis Recommended CSS Rules (Prevents Scroll Fighting & Stutter) */
+html.lenis,
+html.lenis body {
+  height: auto;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
@@ -175,9 +194,10 @@ button {
 .ambient-svg-heart {
   position: absolute;
   opacity: 0.28;
-  filter: drop-shadow(0 0 8px rgba(255, 182, 193, 0.6));
   transform-origin: center;
-  will-change: transform, opacity;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .ambient-sparkle {
@@ -186,7 +206,22 @@ button {
   font-size: 14px;
   opacity: 0.35;
   animation: sparkleTwinkle 4s ease-in-out infinite alternate;
-  will-change: transform, opacity;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Hardware-Accelerated Compositing Layers */
+.ambient-svg-heart,
+.ambient-sparkle,
+.corner-heart-badge,
+.orbit-badge,
+.arch-portrait-img,
+.skill-card,
+.showcase-card {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 @keyframes sparkleTwinkle {
@@ -475,9 +510,11 @@ button {
 .hero-bg-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
+  filter: blur(80px);
   pointer-events: none;
   z-index: 0;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 .glow-1 {
   width: 500px;

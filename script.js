@@ -47,7 +47,8 @@ function initSmoothScroll() {
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        smoothTouch: false,
+        wheelMultiplier: 1,
+        touchMultiplier: 1.5,
       });
 
       if (typeof ScrollTrigger !== 'undefined') {
@@ -58,7 +59,7 @@ function initSmoothScroll() {
         gsap.ticker.lagSmoothing(0);
       } else {
         function raf(time) {
-          lenis.raf(time);
+          lenis.raf(time * 1000);
           requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
@@ -95,8 +96,8 @@ function initAmbientHearts() {
   if (!container) return;
 
   const isMobile = window.innerWidth <= 768;
-  const heartCount = isMobile ? 8 : 18;
-  const sparkleCount = isMobile ? 5 : 12;
+  const heartCount = isMobile ? 5 : 10;
+  const sparkleCount = isMobile ? 3 : 6;
   const colors = [
     'url(#cherryHeartGrad)',
     'url(#softBlushGrad)',
@@ -111,17 +112,17 @@ function initAmbientHearts() {
     const heart = document.createElement('div');
     heart.className = 'ambient-svg-heart';
 
-    const size = Math.floor(Math.random() * 32) + 16;
-    const posX = Math.random() * 100;
-    const posY = Math.random() * 100;
+    const size = Math.floor(Math.random() * 26) + 16;
+    const posX = Math.random() * 96;
+    const posY = Math.random() * 94;
     const color = colors[i % colors.length];
-    const initialRot = Math.random() * 60 - 30;
+    const initialRot = Math.random() * 40 - 20;
 
     heart.style.width = `${size}px`;
     heart.style.height = `${size}px`;
     heart.style.left = `${posX}vw`;
     heart.style.top = `${posY}vh`;
-    heart.style.opacity = (Math.random() * 0.2 + 0.1).toFixed(2);
+    heart.style.opacity = (Math.random() * 0.18 + 0.15).toFixed(2);
 
     heart.innerHTML = `
       <svg viewBox="0 0 24 24" style="width:100%; height:100%;">
@@ -131,15 +132,15 @@ function initAmbientHearts() {
 
     container.appendChild(heart);
 
-    // Continuous floating animation with GSAP force3D
+    // Continuous floating animation with GSAP force3D (NO competing ScrollTrigger scrub on same element)
     if (typeof gsap !== 'undefined') {
-      const duration = Math.random() * 6 + 6;
-      const floatDist = Math.random() * 40 + 20;
+      const duration = Math.random() * 5 + 6;
+      const floatDist = Math.random() * 35 + 20;
 
       gsap.to(heart, {
         y: `-=${floatDist}`,
-        x: `+=${Math.random() * 30 - 15}`,
-        rotation: initialRot + (Math.random() * 40 - 20),
+        x: `+=${Math.random() * 24 - 12}`,
+        rotation: initialRot + (Math.random() * 30 - 15),
         duration: duration,
         repeat: -1,
         yoyo: true,
@@ -147,25 +148,10 @@ function initAmbientHearts() {
         force3D: true,
         delay: Math.random() * 2,
       });
-
-      // Scroll parallax scrub
-      if (typeof ScrollTrigger !== 'undefined') {
-        const scrubSpeed = (Math.random() * 150 + 50) * (i % 2 === 0 ? 1 : -1);
-        gsap.to(heart, {
-          y: `+=${scrubSpeed}`,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: 'body',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1.5,
-          },
-        });
-      }
     }
   }
 
-  // Add ambient 4-point sparkles (tuned for mobile/desktop performance)
+  // Add ambient 4-point sparkles (tuned for 60fps/120fps performance)
   for (let s = 0; s < sparkleCount; s++) {
     const sparkle = document.createElement('div');
     sparkle.className = 'ambient-sparkle';
@@ -210,7 +196,7 @@ function initHeartCursor() {
       cursor.style.left = `${mouseX}px`;
       cursor.style.top = `${mouseY}px`;
     }
-  });
+  }, { passive: true });
 
   // Spawn heart on click
   window.addEventListener('click', (e) => {
@@ -566,6 +552,7 @@ function initScrollAnimations() {
    6. MAGNETIC BUTTON PHYSICS
    ========================================================================== */
 function initMagneticPhysics() {
+  if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
   const magnets = document.querySelectorAll('.magnetic');
 
   magnets.forEach((el) => {
@@ -587,7 +574,7 @@ function initMagneticPhysics() {
       } else {
         el.style.transform = `translate(${x}px, ${y}px)`;
       }
-    });
+    }, { passive: true });
 
     el.addEventListener('mouseleave', () => {
       if (typeof gsap !== 'undefined') {
