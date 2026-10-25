@@ -427,7 +427,30 @@ function triggerHeroEntrance() {
       stagger: 0.15,
       duration: 0.6,
       ease: 'back.out(1.8)',
-    }, '-=0.5');
+    }, '-=0.5')
+    .from('.corner-heart-badge', {
+      scale: 0,
+      autoAlpha: 0,
+      rotation: -25,
+      stagger: 0.1,
+      duration: 0.55,
+      ease: 'back.out(2)',
+    }, '-=0.45');
+
+  // Continuous GSAP floating animation for corner SVG heart badges
+  gsap.utils.toArray('.corner-heart-badge').forEach((badge, idx) => {
+    gsap.to(badge, {
+      y: idx % 2 === 0 ? -12 : 12,
+      x: idx % 2 === 0 ? 5 : -5,
+      rotation: idx % 2 === 0 ? 12 : -12,
+      scale: 1.08,
+      duration: 2.2 + idx * 0.35,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+      force3D: true,
+    });
+  });
 
   // Trigger scroll-based reveal animations
   initScrollAnimations();

@@ -244,6 +244,28 @@
                 <span class="orbit-label">60fps Web Dev</span>
               </div>
 
+              <!-- Floating SVG Heart Corner Badges (GSAP Animated) -->
+              <div class="corner-heart-badge corner-tl" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="corner-heart-svg">
+                  <use href="#gloss-heart" fill="url(#cherryHeartGrad)"/>
+                </svg>
+              </div>
+              <div class="corner-heart-badge corner-tr" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="corner-heart-svg">
+                  <use href="#gloss-heart" fill="url(#softBlushGrad)"/>
+                </svg>
+              </div>
+              <div class="corner-heart-badge corner-bl" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="corner-heart-svg">
+                  <use href="#gloss-heart" fill="url(#softBlushGrad)"/>
+                </svg>
+              </div>
+              <div class="corner-heart-badge corner-br" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="corner-heart-svg">
+                  <use href="#gloss-heart" fill="url(#cherryHeartGrad)"/>
+                </svg>
+              </div>
+
               <!-- Arched Velvet Glass Frame -->
               <div class="arched-frame-wrapper">
                 <div class="arch-glow-border"></div>
@@ -259,6 +281,8 @@
                     src="assets/jana_profile.jpg"
                     alt="Jana Soliman - CS Undergraduate & Creative Developer"
                     class="arch-portrait-img"
+                    loading="eager"
+                    decoding="async"
                     onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 500\' fill=\'%23140408\'><rect width=\'400\' height=\'500\' fill=\'%23140408\'/><circle cx=\'200\' cy=\'200\' r=\'90\' fill=\'%23FF4D6D\'/><path d=\'M110 390 C110 300 290 300 290 390\' fill=\'%23D91636\'/><text x=\'200\' y=\'450\' text-anchor=\'middle\' fill=\'%23FFF0F3\' font-size=\'22\' font-family=\'sans-serif\'>Jana Soliman 💖</text></svg>';"
                   />
 
@@ -345,7 +369,10 @@
               </div>
             </div>
             <div class="spotlight-icon-col">
-              <img src="assets/hnu_logo.png" alt="HNU Logo" class="hnu-badge-logo" onerror="this.style.display='none'">
+              <div class="about-mini-portrait-frame">
+                <img src="assets/jana_profile.jpg" alt="Jana Soliman at Helwan National University" class="about-mini-portrait" loading="lazy">
+                <span class="mini-portrait-badge">🎀 HNU CS</span>
+              </div>
             </div>
           </div>
 

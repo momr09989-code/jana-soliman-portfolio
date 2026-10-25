@@ -743,14 +743,18 @@ button {
   position: relative;
   border-radius: var(--arch-radius);
   padding: 8px;
-  background: linear-gradient(180deg, rgba(255, 179, 193, 0.5) 0%, rgba(217, 22, 54, 0.8) 50%, rgba(30, 7, 13, 0.95) 100%);
-  box-shadow: 0 30px 70px rgba(217, 22, 54, 0.35), 0 0 50px rgba(255, 77, 109, 0.2);
-  transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease;
+  border: 2px solid rgba(255, 77, 109, 0.5);
+  background: linear-gradient(180deg, rgba(255, 179, 193, 0.45) 0%, rgba(217, 22, 54, 0.75) 50%, rgba(30, 7, 13, 0.95) 100%);
+  box-shadow: 0 0 35px rgba(217, 22, 54, 0.45), 0 30px 70px rgba(217, 22, 54, 0.35), inset 0 1px 2px rgba(255, 240, 243, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .arched-frame-wrapper:hover {
   transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 40px 90px rgba(255, 77, 109, 0.45), 0 0 70px rgba(255, 77, 109, 0.3);
+  border-color: rgba(255, 179, 193, 0.85);
+  box-shadow: 0 0 50px rgba(217, 22, 54, 0.65), 0 40px 90px rgba(255, 77, 109, 0.45);
 }
 
 .arch-frame-inner {
@@ -758,6 +762,8 @@ button {
   width: 100%;
   height: 480px;
   border-radius: 212px 212px 28px 28px;
+  border: 2px solid rgba(255, 77, 109, 0.5);
+  box-shadow: 0 0 35px rgba(217, 22, 54, 0.45);
   overflow: hidden;
   background-color: var(--bg-velvet-surface);
 }
@@ -767,11 +773,95 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  transition: transform 0.6s var(--transition-smooth);
+  image-rendering: -webkit-optimize-contrast;
+  filter: contrast(1.03) saturate(1.05);
+  transition: transform 0.6s var(--transition-smooth), filter 0.4s ease;
 }
 
 .arched-frame-wrapper:hover .arch-portrait-img {
   transform: scale(1.04);
+  filter: contrast(1.06) saturate(1.08);
+}
+
+/* Floating SVG Heart Corner Badges */
+.corner-heart-badge {
+  position: absolute;
+  z-index: 16;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+  border-radius: 50%;
+  background: rgba(30, 7, 13, 0.78);
+  border: 1px solid rgba(255, 77, 109, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 22px rgba(217, 22, 54, 0.5), inset 0 1px 1px rgba(255, 240, 243, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.corner-heart-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 8px rgba(255, 77, 109, 0.75));
+}
+
+.corner-tl {
+  top: 6%;
+  left: 4%;
+}
+
+.corner-tr {
+  top: 8%;
+  right: 4%;
+}
+
+.corner-bl {
+  bottom: 18%;
+  left: -5%;
+}
+
+.corner-br {
+  bottom: 6%;
+  right: -4%;
+}
+
+/* About Section Mini Framed Portrait */
+.about-mini-portrait-frame {
+  position: relative;
+  width: 115px;
+  height: 140px;
+  border-radius: 60px 60px 18px 18px;
+  border: 2px solid rgba(255, 77, 109, 0.5);
+  box-shadow: 0 0 35px rgba(217, 22, 54, 0.45);
+  overflow: hidden;
+  background: var(--bg-velvet-surface);
+  flex-shrink: 0;
+}
+
+.about-mini-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.mini-portrait-badge {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--cream-white);
+  background: rgba(20, 4, 8, 0.85);
+  border: 1px solid rgba(255, 77, 109, 0.5);
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
 .arch-ribbon-crown {
