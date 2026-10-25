@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jana Soliman | I'm Just a Girl Who Codes 💖 | Creative Tech & UI/UX</title>
+  <meta name="description" content="Jana Soliman — Computer Science & IT Undergraduate at Helwan National University (HNU). Interactive Coquette & Creative Tech Portfolio featuring GSAP, 60fps motion, and modern web engineering.">
+  <meta name="keywords" content="Jana Soliman, Creative Developer, Coquette Web Design, UI UX, GSAP, HNU, Helwan National University, Frontend Developer">
+  <meta name="author" content="Jana Soliman">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Jana Soliman | I'm Just a Girl Who Codes 💖">
+  <meta property="og:description" content="Awwwards-level interactive portfolio with coquette cherry-velvet aesthetics, 60fps GSAP animations, and modern web tech.">
+  <meta property="og:image" content="assets/jana_profile.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎀</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient SVG Sprites & Filter Definitions -->
+  <svg style="display: none;" aria-hidden="true">
+    <defs>
+      <!-- 3D Glossy Cherry Heart -->
+      <radialGradient id="cherryHeartGrad" cx="35%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="#FFB3C1" />
+        <stop offset="30%" stop-color="#FF4D6D" />
+        <stop offset="70%" stop-color="#D91636" />
+        <stop offset="100%" stop-color="#80061A" />
+      </radialGradient>
+      <radialGradient id="softBlushGrad" cx="40%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="#FFF0F3" />
+        <stop offset="45%" stop-color="#FFB3C1" />
+        <stop offset="90%" stop-color="#FF4D6D" />
+        <stop offset="100%" stop-color="#C9184A" />
+      </radialGradient>
+      <linearGradient id="glowGlowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FF4D6D" stop-opacity="0.8" />
+        <stop offset="100%" stop-color="#D91636" stop-opacity="0.2" />
+      </linearGradient>
+
+      <!-- Gloss Highlight Heart Symbol -->
+      <g id="gloss-heart">
+        <path class="heart-shape" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        <!-- Specular Highlight for 3D candy sheen -->
+        <ellipse cx="7.5" cy="6.5" rx="2.5" ry="1.2" transform="rotate(-30 7.5 6.5)" fill="rgba(255, 255, 255, 0.65)" />
+      </g>
+    </defs>
+  </svg>
+
+  <!-- Interactive Glowing Heart Cursor Follower -->
+  <div id="heart-cursor" class="heart-cursor" aria-hidden="true">
+    <svg viewBox="0 0 24 24" class="cursor-svg">
+      <use href="#gloss-heart" fill="url(#cherryHeartGrad)"/>
+    </svg>
+    <div class="cursor-glow"></div>
+  </div>
+
+  <!-- Ambient Floating 3D Hearts & Sparkles Layer -->
+  <div id="ambient-hearts" class="ambient-hearts-container" aria-hidden="true"></div>
+
+  <!-- Heart-Themed Preloader Screen -->
+  <aside id="preloader" class="preloader-overlay" aria-label="Loading Jana's World">
+    <div class="preloader-curtain left-curtain"></div>
+    <div class="preloader-curtain right-curtain"></div>
+    <div class="preloader-content">
+      <div class="beating-heart-wrapper">
+        <div class="heart-liquid-container">
+          <svg viewBox="0 0 100 90" class="liquid-heart-svg">
+            <path id="heart-track" d="M50,85 C20,55 0,35 0,20 C0,8 12,0 25,0 C36,0 45,8 50,18 C55,8 64,0 75,0 C88,0 100,8 100,20 C100,35 80,55 50,85 Z" fill="rgba(255, 77, 109, 0.15)" stroke="rgba(255, 77, 109, 0.4)" stroke-width="2"/>
+            <clipPath id="heart-clip">
+              <path d="M50,85 C20,55 0,35 0,20 C0,8 12,0 25,0 C36,0 45,8 50,18 C55,8 64,0 75,0 C88,0 100,8 100,20 C100,35 80,55 50,85 Z"/>
+            </clipPath>
+            <g clip-path="url(#heart-clip)">
+              <rect id="liquid-fill" x="0" y="90" width="100" height="90" fill="url(#cherryHeartGrad)"/>
+            </g>
+            <!-- 3D Glass Sheen -->
+            <ellipse cx="28" cy="18" rx="12" ry="5" transform="rotate(-35 28 18)" fill="rgba(255, 255, 255, 0.5)" />
+          </svg>
+          <div class="heart-pulse-halo"></div>
+        </div>
+      </div>
+      <div class="preloader-text-group">
+        <div class="preloader-badge">
+          <span class="sparkle-icon">✨</span>
+          <span class="coquette-tagline">Loading Jana's World... 💖</span>
+          <span class="sparkle-icon">✨</span>
+        </div>
+        <div class="preloader-counter-row">
+          <span class="counter-number" id="preloader-percent">0</span>
+          <span class="counter-symbol">%</span>
+        </div>
+        <div class="preloader-progress-track">
+          <div class="preloader-progress-bar" id="preloader-bar"></div>
+        </div>
+        <p class="preloader-subtitle">Coquette Aesthetics · 60fps Motion · Creative Tech</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sticky Coquette Navigation Bar -->
+  <header class="site-header">
+    <nav class="nav-container" aria-label="Main Navigation">
+      <a href="#hero" class="nav-brand magnetic" data-magnetic-strength="0.2">
+        <span class="brand-ribbon">🎀</span>
+        <span class="brand-name">Jana<span class="brand-dot">.</span>soliman</span>
+      </a>
+
+      <div class="nav-links-pill">
+        <a href="#hero" class="nav-link active magnetic" data-magnetic-strength="0.15">
+          <span class="nav-icon">✦</span> Home
+        </a>
+        <a href="#about" class="nav-link magnetic" data-magnetic-strength="0.15">
+          <span class="nav-icon">💖</span> About
+        </a>
+        <a href="#skills" class="nav-link magnetic" data-magnetic-strength="0.15">
+          <span class="nav-icon">🍒</span> Skills
+        </a>
+        <a href="#showcase" class="nav-link magnetic" data-magnetic-strength="0.15">
+          <span class="nav-icon">🎀</span> Showcase
+        </a>
+        <a href="#contact" class="nav-link magnetic" data-magnetic-strength="0.15">
+          <span class="nav-icon">💌</span> Contact
+        </a>
+      </div>
+
+      <div class="nav-cta-wrapper">
+        <a href="https://wa.me/201151194520" target="_blank" rel="noopener noreferrer" class="btn-coquette-pill magnetic" data-magnetic-strength="0.25">
+          <span class="pill-sparkle">✨</span>
+          <span>Let's Talk</span>
+          <span class="pill-heart">💖</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Flow -->
+  <main id="smooth-wrapper">
+    <div id="smooth-content">
+
+      <!-- ================= HERO SECTION ================= -->
+      <section id="hero" class="hero-section" aria-label="Hero Introduction">
+        <div class="hero-bg-glow glow-1" aria-hidden="true"></div>
+        <div class="hero-bg-glow glow-2" aria-hidden="true"></div>
+
+        <div class="hero-container container">
+          <!-- Left Column: Typography & Badges -->
+          <div class="hero-content">
+            <div class="hero-badge-container">
+              <div class="coquette-badge magnetic" data-magnetic-strength="0.1">
+                <span class="badge-ribbon">🎀</span>
+                <span class="badge-text">✨ I'm just a girl who codes ✨</span>
+              </div>
+              <div class="coquette-badge sub-badge magnetic" data-magnetic-strength="0.1">
+                <span class="badge-cherry">🍒</span>
+                <span class="badge-text">Fueled by coffee & pink aesthetics</span>
+              </div>
+            </div>
+
+            <h1 class="hero-title">
+              <span class="title-line title-script">Hi, I'm</span>
+              <span class="title-line title-highlight">
+                Jana Soliman
+                <span class="arabic-name" title="جنى سليمان">(جنى سليمان)</span>
+              </span>
+              <span class="title-line title-sub">
+                Crafting <span class="text-gradient">delightful</span> web experiences & high-fps creative code.
+              </span>
+            </h1>
+
+            <p class="hero-bio">
+              Computer Science & IT undergraduate at <strong>Helwan National University (HNU)</strong>. Blending high-precision frontend architecture, interactive GSAP motion, and coquette cherry-red aesthetics into unforgettable digital spaces.
+            </p>
+
+            <!-- Quick Academic Status Strip -->
+            <div class="hero-academic-pill">
+              <span class="academic-icon">🎓</span>
+              <span class="academic-text">CS & IT @ Helwan National University · Good Academic Standing</span>
+              <span class="academic-heart">💖</span>
+            </div>
+
+            <!-- Call to Actions -->
+            <div class="hero-actions">
+              <a href="#showcase" class="btn-cherry-primary magnetic" data-magnetic-strength="0.3">
+                <span class="btn-shine"></span>
+                <span class="btn-icon">🎀</span>
+                <span>Explore My Creations</span>
+                <span class="arrow-icon">→</span>
+              </a>
+
+              <a href="https://wa.me/201151194520" target="_blank" rel="noopener noreferrer" class="btn-cherry-glass magnetic" data-magnetic-strength="0.3">
+                <span class="btn-icon">💬</span>
+                <span>WhatsApp Jana</span>
+              </a>
+
+              <a href="mailto:Janamo16108@gmail.com" class="btn-cherry-icon magnetic" data-magnetic-strength="0.4" title="Send Email" aria-label="Send direct email to Jana">
+                <span>✉️</span>
+              </a>
+            </div>
+
+            <!-- Key Quick Stats -->
+            <div class="hero-micro-metrics">
+              <div class="metric-item">
+                <span class="metric-val">60<small>fps</small></span>
+                <span class="metric-lbl">Silky Smooth Motion</span>
+              </div>
+              <div class="metric-sep">✦</div>
+              <div class="metric-item">
+                <span class="metric-val">HNU<small>CS</small></span>
+                <span class="metric-lbl">Helwan National Univ</span>
+              </div>
+              <div class="metric-sep">✦</div>
+              <div class="metric-item">
+                <span class="metric-val">100<small>%</small></span>
+                <span class="metric-lbl">Girly Passion & Dedication</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Arched Glass Frame & Orbiting Badges -->
+          <div class="hero-visual">
+            <div class="arched-portrait-stage">
+              <!-- Orbiting Coquette Badges -->
+              <div class="orbit-badge badge-top-left float-badge-1 magnetic" data-magnetic-strength="0.2">
+                <span class="orbit-icon">💻</span>
+                <span class="orbit-label">CS & IT @ HNU</span>
+                <span class="orbit-sparkle">✨</span>
+              </div>
+              <div class="orbit-badge badge-middle-right float-badge-2 magnetic" data-magnetic-strength="0.2">
+                <span class="orbit-icon">💖</span>
+                <span class="orbit-label">UI/UX & Motion</span>
+              </div>
+              <div class="orbit-badge badge-bottom-left float-badge-3 magnetic" data-magnetic-strength="0.2">
+                <span class="orbit-icon">🎀</span>
+                <span class="orbit-label">60fps Web Dev</span>
+              </div>
+
+              <!-- Arched Velvet Glass Frame -->
+              <div class="arched-frame-wrapper">
+                <div class="arch-glow-border"></div>
+                <div class="arch-frame-inner">
+                  <!-- Coquette Top Crown Ribbon -->
+                  <div class="arch-ribbon-crown" aria-hidden="true">
+                    <span class="crown-ribbon">🎀</span>
+                    <span class="crown-heart">💖</span>
+                  </div>
+
+                  <!-- Profile Image with Graceful SVG Fallback -->
+                  <img
+                    src="assets/jana_profile.jpg"
+                    alt="Jana Soliman - CS Undergraduate & Creative Developer"
+                    class="arch-portrait-img"
+                    onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 500\' fill=\'%23140408\'><rect width=\'400\' height=\'500\' fill=\'%23140408\'/><circle cx=\'200\' cy=\'200\' r=\'90\' fill=\'%23FF4D6D\'/><path d=\'M110 390 C110 300 290 300 290 390\' fill=\'%23D91636\'/><text x=\'200\' y=\'450\' text-anchor=\'middle\' fill=\'%23FFF0F3\' font-size=\'22\' font-family=\'sans-serif\'>Jana Soliman 💖</text></svg>';"
+                  />
+
+                  <!-- Glass Sheen Overlay -->
+                  <div class="arch-glass-specular" aria-hidden="true"></div>
+
+                  <!-- Frame Caption Pill -->
+                  <div class="arch-caption-pill">
+                    <span class="caption-dot"></span>
+                    <span class="caption-text">Jana Soliman · Creative Technologist</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Decorative Floating Sparkles -->
+              <div class="decorative-sparkle sp-1">✦</div>
+              <div class="decorative-sparkle sp-2">💖</div>
+              <div class="decorative-sparkle sp-3">✦</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marquee Ticker -->
+        <div class="coquette-ticker-wrapper" aria-hidden="true">
+          <div class="ticker-track">
+            <span class="ticker-item">🎀 I'M JUST A GIRL WHO CODES</span>
+            <span class="ticker-star">✦</span>
+            <span class="ticker-item">💖 HELWAN NATIONAL UNIVERSITY CS</span>
+            <span class="ticker-star">✦</span>
+            <span class="ticker-item">🍒 60FPS GSAP MOTION & LENIS SCROLL</span>
+            <span class="ticker-star">✦</span>
+            <span class="ticker-item">✨ BEAUTIFUL COQUETTE UI/UX</span>
+            <span class="ticker-star">✦</span>
+            <span class="ticker-item">🌸 PYTHON & REACT DEVELOPMENT</span>
+            <span class="ticker-star">✦</span>
+            <span class="ticker-item">🎀 I'M JUST A GIRL WHO CODES</span>
+            <span class="ticker-star">✦</span>
+            <span class="ticker-item">💖 HELWAN NATIONAL UNIVERSITY CS</span>
+            <span class="ticker-star">✦</span>
+            <span class="ticker-item">🍒 60FPS GSAP MOTION & LENIS SCROLL</span>
+            <span class="ticker-star">✦</span>
+            <span class="ticker-item">✨ BEAUTIFUL COQUETTE UI/UX</span>
+            <span class="ticker-star">✦</span>
+            <span class="ticker-item">🌸 PYTHON & REACT DEVELOPMENT</span>
+            <span class="ticker-star">✦</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ABOUT & ACADEMIC SECTION ================= -->
+      <section id="about" class="section about-section" aria-label="About Jana Soliman">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-tag magnetic" data-magnetic-strength="0.1">
+              <span class="tag-icon">💖</span>
+              <span>Her Story & Academic Journey</span>
+            </div>
+            <h2 class="section-title">
+              Feminine Aesthetics meets <span class="text-gradient">Algorithmic Precision</span>
+            </h2>
+            <p class="section-subtitle">
+              Building purposeful digital products where coquette whimsy, smooth interaction design, and rigorous software fundamentals intertwine.
+            </p>
+          </div>
+
+          <!-- Academic Standing Badge (Prominent Requirement) -->
+          <div class="academic-spotlight-card magnetic" data-magnetic-strength="0.08">
+            <div class="spotlight-bow">🎀</div>
+            <div class="spotlight-content">
+              <div class="spotlight-header">
+                <span class="spotlight-pill">🎓 Helwan National University (HNU)</span>
+                <span class="spotlight-status">🟢 Enrolled & Active</span>
+              </div>
+              <h3 class="spotlight-title">Computer Science & Information Technology</h3>
+              <p class="spotlight-badge-text">
+                Active CS Undergraduate @ HNU | Good Academic Standing (GPA: 2.5) | Focused on Practical UI/UX & Web Engineering
+              </p>
+              <div class="spotlight-tags">
+                <span class="s-tag">Algorithms & Logic</span>
+                <span class="s-tag">Data Structures</span>
+                <span class="s-tag">Web Architecture</span>
+                <span class="s-tag">Database Management</span>
+                <span class="s-tag">Motion Engineering</span>
+              </div>
+            </div>
+            <div class="spotlight-icon-col">
+              <img src="assets/hnu_logo.png" alt="HNU Logo" class="hnu-badge-logo" onerror="this.style.display='none'">
+            </div>
+          </div>
+
+          <!-- Bento Grid: Story & Philosophy -->
+          <div class="about-bento-grid">
+            <!-- Card 1: The "I'm Just A Girl" Philosophy -->
+            <div class="bento-card bento-philosophy">
+              <div class="card-glass-glow"></div>
+              <div class="bento-header">
+                <span class="bento-emoji">🎀</span>
+                <span class="bento-kicker">Philosophy</span>
+              </div>
+              <h4 class="bento-title">The "I'm Just A Girl" Superpower</h4>
+              <p class="bento-text">
+                Who says high-performance web development has to be sterile or dark-grey? Embracing the "I'm just a girl" coquette culture means infusing warmth, emotion, playful heart micro-interactions, and visual sweetness into every pixel without sacrificing a single frame of performance.
+              </p>
+              <div class="coquette-quote">
+                "Writing clean code while listening to favorite tracks and curating the prettiest color palettes."
+              </div>
+            </div>
+
+            <!-- Card 2: Technical Rigor & University Foundations -->
+            <div class="bento-card bento-rigor">
+              <div class="card-glass-glow"></div>
+              <div class="bento-header">
+                <span class="bento-emoji">💻</span>
+                <span class="bento-kicker">Tech Foundations</span>
+              </div>
+              <h4 class="bento-title">HNU Academic Coursework</h4>
+              <p class="bento-text">
+                Studying CS & IT at Helwan National University has provided a solid base across computational problem-solving, structured programming, object-oriented concepts, and relational databases. Jana applies these fundamentals to modern JavaScript, Python automation, and React applications.
+              </p>
+              <ul class="bento-checklist">
+                <li><span class="check-heart">💖</span> Strong problem-solving & clean code practices</li>
+                <li><span class="check-heart">💖</span> Hands-on experience with Python data pipelines</li>
+                <li><span class="check-heart">💖</span> Obsessed with 60fps buttery smooth UI animations</li>
+              </ul>
+            </div>
+
+            <!-- Card 3: Creative Tech & Design Eye -->
+            <div class="bento-card bento-design">
+              <div class="card-glass-glow"></div>
+              <div class="bento-header">
+                <span class="bento-emoji">🍒</span>
+                <span class="bento-kicker">Design Sensibility</span>
+              </div>
+              <h4 class="bento-title">Aesthetic Motion & UI/UX</h4>
+              <p class="bento-text">
+                Specialized in micro-animations, glassmorphism, responsive Bento grids, and SVG manipulation. Every hover state, scroll trigger, and button press is tuned to feel tactile, delightful, and natural.
+              </p>
+              <div class="bento-badges-row">
+                <span class="mini-pill">✨ GSAP 3</span>
+                <span class="mini-pill">✨ Lenis Scroll</span>
+                <span class="mini-pill">✨ Responsive UI</span>
+                <span class="mini-pill">✨ Glassmorphism</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SKILLS & TECH STACK SECTION ================= -->
+      <section id="skills" class="section skills-section" aria-label="Skills and Tech Stack">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-tag magnetic" data-magnetic-strength="0.1">
+              <span class="tag-icon">🍒</span>
+              <span>Her Digital Toolbox</span>
+            </div>
+            <h2 class="section-title">
+              Skills & <span class="text-gradient">Tech Stack</span>
+            </h2>
+            <p class="section-subtitle">
+              Hover over any skill card to trigger a glowing heart burst! Powered by modern web standards and solid software fundamentals.
+            </p>
+          </div>
+
+          <!-- Category 1: Frontend & Motion -->
+          <div class="skills-category-group">
+            <div class="category-header">
+              <div class="cat-title-wrap">
+                <span class="cat-ribbon">🎀</span>
+                <h3 class="cat-title">Frontend Engineering & Creative Motion</h3>
+              </div>
+              <span class="cat-badge">Interactive & 60fps</span>
+            </div>
+
+            <div class="skills-grid">
+              <!-- Skill: HTML5 -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/html5.svg" alt="HTML5 Logo" class="skill-icon" onerror="this.src='assets/adaptability.svg'">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">HTML5</h4>
+                  <p class="skill-desc">Semantic markup, accessibility (a11y), clean DOM structure.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: CSS3 -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/css3.svg" alt="CSS3 Logo" class="skill-icon" onerror="this.src='assets/adaptability.svg'">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">CSS3 & Variables</h4>
+                  <p class="skill-desc">Modern Flexbox/Grid, glassmorphism, responsive design tokens.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: JavaScript (ES6+) -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/javascript.svg" alt="JavaScript Logo" class="skill-icon" onerror="this.src='assets/adaptability.svg'">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">JavaScript (ES6+)</h4>
+                  <p class="skill-desc">Asynchronous APIs, event architecture, dynamic DOM manipulation.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: React -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/react.svg" alt="React Logo" class="skill-icon">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">React</h4>
+                  <p class="skill-desc">Component hierarchies, hooks, state management, modular design.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: Vite -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/vite.svg" alt="Vite Logo" class="skill-icon">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">Vite</h4>
+                  <p class="skill-desc">Blazing fast modern bundler, HMR, optimized production builds.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: GSAP -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/gsap.svg" alt="GSAP Logo" class="skill-icon">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">GSAP 3 & ScrollTrigger</h4>
+                  <p class="skill-desc">Complex timeline choreography, physics easing, parallax scroll.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: Lenis -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/lenis.svg" alt="Lenis Logo" class="skill-icon">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">Lenis Smooth Scroll</h4>
+                  <p class="skill-desc">Momentum-based scrolling, GSAP ticker sync, normalized physics.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: Responsive UI/UX -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/adaptability.svg" alt="UI/UX Logo" class="skill-icon">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">Responsive UI/UX</h4>
+                  <p class="skill-desc">Mobile-first ergonomics, micro-interactions, coquette design systems.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 2: Programming & Tech Foundations -->
+          <div class="skills-category-group">
+            <div class="category-header">
+              <div class="cat-title-wrap">
+                <span class="cat-ribbon">💻</span>
+                <h3 class="cat-title">Programming & Tech Foundations</h3>
+              </div>
+              <span class="cat-badge">Academic & Practical</span>
+            </div>
+
+            <div class="skills-grid">
+              <!-- Skill: Python -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/python.svg" alt="Python Logo" class="skill-icon">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">Python</h4>
+                  <p class="skill-desc">Core programming, scripting, object-oriented concepts, HNU labs.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: Pandas -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/pandas.svg" alt="Pandas Logo" class="skill-icon">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">Data Manipulation (Pandas)</h4>
+                  <p class="skill-desc">DataFrames, data cleaning, aggregation, exploratory analysis.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: Git & GitHub -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/git.svg" alt="Git Logo" class="skill-icon">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">Git & GitHub</h4>
+                  <p class="skill-desc">Version control, branching strategies, automated Pages deployments.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: AI Prompt Engineering -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/ai.svg" alt="AI Workflows Logo" class="skill-icon">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">AI Prompt Workflows</h4>
+                  <p class="skill-desc">Generative AI workflows, structured prompting, workflow acceleration.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: Cybersecurity Basics -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/kalilinux.svg" alt="Cybersecurity Logo" class="skill-icon" onerror="this.src='assets/mitmproxy.svg'">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">Cybersecurity Basics</h4>
+                  <p class="skill-desc">Security protocols, network fundamentals, data hygiene & safe coding.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+
+              <!-- Skill: Database Design & SQL -->
+              <div class="skill-card magnetic" data-magnetic-strength="0.15">
+                <div class="card-sparkle-bg"></div>
+                <div class="skill-icon-wrap">
+                  <img src="assets/database-design.svg" alt="Database Logo" class="skill-icon" onerror="this.src='assets/sql.svg'">
+                </div>
+                <div class="skill-info">
+                  <h4 class="skill-name">Database Foundations</h4>
+                  <p class="skill-desc">Relational modeling, ERDs, SQL queries, normalized schemas.</p>
+                </div>
+                <div class="skill-burst-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CREATIVE SHOWCASE / ACADEMIC LABS ================= -->
+      <section id="showcase" class="section showcase-section" aria-label="Creative Showcase and Projects">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-tag magnetic" data-magnetic-strength="0.1">
+              <span class="tag-icon">🎀</span>
+              <span>Selected Works & Lab Experiments</span>
+            </div>
+            <h2 class="section-title">
+              Creative Showcase & <span class="text-gradient">Academic Labs</span>
+            </h2>
+            <p class="section-subtitle">
+              Interactive demonstrations and academic projects developed with precision, passion, and coquette flair.
+            </p>
+          </div>
+
+          <div class="showcase-cards-wrapper">
+            <!-- Project 1: Coquette Interactive Web Experience -->
+            <article class="showcase-card magnetic" data-magnetic-strength="0.05">
+              <div class="card-header-bar">
+                <div class="browser-dots">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                </div>
+                <span class="project-num">Project 01 / Motion Web</span>
+                <span class="project-badge-tag">Awwwards-Tier Design</span>
+              </div>
+
+              <div class="showcase-body">
+                <div class="showcase-info-col">
+                  <span class="project-kicker">🎀 Flagship Web Experience</span>
+                  <h3 class="project-title">Coquette Interactive Web Experience</h3>
+                  <h4 class="project-subtitle">High-FPS Motion Web Design Using GSAP & Lenis</h4>
+                  <p class="project-description">
+                    Choreographed <code>expo.inOut</code> entrance transitions, custom 3D SVG heart particle spawner engine, and 60fps glassmorphic layouts. Designed to push browser capabilities while maintaining lightweight load times and graceful degradation.
+                  </p>
+
+                  <div class="project-highlights">
+                    <div class="highlight-item">
+                      <span class="h-icon">✨</span>
+                      <span>Choreographed GSAP 3 timelines with hardware-accelerated transforms</span>
+                    </div>
+                    <div class="highlight-item">
+                      <span class="h-icon">💖</span>
+                      <span>Physics-based floating SVG hearts with dynamic gravity and scale</span>
+                    </div>
+                    <div class="highlight-item">
+                      <span class="h-icon">🍒</span>
+                      <span>Velvet-cherry glassmorphism with dynamic ambient glow</span>
+                    </div>
+                  </div>
+
+                  <div class="project-tags">
+                    <span class="tag">GSAP 3</span>
+                    <span class="tag">Lenis</span>
+                    <span class="tag">HTML5/CSS3</span>
+                    <span class="tag">Interactive Motion</span>
+                  </div>
+
+                  <div class="project-links">
+                    <a href="#hero" class="btn-project-action magnetic" data-magnetic-strength="0.2">
+                      <span>Experience Live On This Page</span>
+                      <span class="btn-arrow">↑</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Interactive Visual Preview Sandbox -->
+                <div class="showcase-preview-col">
+                  <div class="interactive-preview-box motion-box">
+                    <div class="preview-glow"></div>
+                    <div class="preview-stage" id="preview-stage-1">
+                      <div class="stage-heart-center">
+                        <svg viewBox="0 0 100 90" class="stage-heart-svg">
+                          <path d="M50,85 C20,55 0,35 0,20 C0,8 12,0 25,0 C36,0 45,8 50,18 C55,8 64,0 75,0 C88,0 100,8 100,20 C100,35 80,55 50,85 Z" fill="url(#cherryHeartGrad)"/>
+                        </svg>
+                        <span class="stage-sparkle-center">60 FPS</span>
+                      </div>
+                      <div class="stage-orbit-ring ring-1"></div>
+                      <div class="stage-orbit-ring ring-2"></div>
+                      <div class="stage-orbit-particle p1">💖</div>
+                      <div class="stage-orbit-particle p2">✦</div>
+                      <div class="stage-orbit-particle p3">🎀</div>
+                    </div>
+                    <div class="preview-caption">
+                      <span>Interactive Motion Physics · Real-Time Canvas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 2: Python & Smart Automation Lab -->
+            <article class="showcase-card magnetic" data-magnetic-strength="0.05">
+              <div class="card-header-bar">
+                <div class="browser-dots">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                </div>
+                <span class="project-num">Project 02 / Academic Lab</span>
+                <span class="project-badge-tag">HNU Coursework</span>
+              </div>
+
+              <div class="showcase-body">
+                <div class="showcase-info-col">
+                  <span class="project-kicker">🐍 Data & Scripting</span>
+                  <h3 class="project-title">Python & Smart Automation Lab</h3>
+                  <h4 class="project-subtitle">Academic Scripts and Data Workflows Built at HNU</h4>
+                  <p class="project-description">
+                    Practical Python automation scripts and Pandas dataframe processing pipelines developed during CS & IT coursework at Helwan National University. Automates data extraction, cleaning, normalization, and statistical summarization.
+                  </p>
+
+                  <div class="project-highlights">
+                    <div class="highlight-item">
+                      <span class="h-icon">📊</span>
+                      <span>Pandas DataFrame aggregation and missing value imputation</span>
+                    </div>
+                    <div class="highlight-item">
+                      <span class="h-icon">⚡</span>
+                      <span>Automated file parsers and dataset integrity validators</span>
+                    </div>
+                    <div class="highlight-item">
+                      <span class="h-icon">🎓</span>
+                      <span>Rigorous computational problem-solving tested in academic labs</span>
+                    </div>
+                  </div>
+
+                  <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">Data Manipulation</span>
+                    <span class="tag">HNU CS Lab</span>
+                  </div>
+
+                  <div class="project-links">
+                    <button type="button" class="btn-project-action magnetic run-demo-btn" data-demo="python" data-magnetic-strength="0.2">
+                      <span>Simulate Pipeline Run</span>
+                      <span class="btn-arrow">⚡</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Interactive Code / Terminal Visual Preview -->
+                <div class="showcase-preview-col">
+                  <div class="interactive-preview-box terminal-box">
+                    <div class="terminal-bar">
+                      <span class="term-title">jana_hnu_pipeline.py</span>
+                      <span class="term-status" id="term-status">READY</span>
+                    </div>
+                    <div class="terminal-code" id="terminal-code">
+                      <span class="t-comment"># Helwan National University CS & IT Lab</span>
+                      <span class="t-line"><span class="t-kw">import</span> pandas <span class="t-kw">as</span> pd</span>
+                      <span class="t-line"><span class="t-kw">import</span> numpy <span class="t-kw">as</span> np</span>
+                      <span class="t-line">df = pd.read_csv(<span class="t-str">'hnu_student_metrics.csv'</span>)</span>
+                      <span class="t-line">cleaned = df.dropna().groupby(<span class="t-str">'department'</span>).mean()</span>
+                      <span class="t-line"><span class="t-func">print</span>(<span class="t-str">f"✨ Processed {len(df)} records flawlessly 💖"</span>)</span>
+                      <div class="terminal-output" id="term-output">
+                        &gt; [SUCCESS] Pipeline execution complete.<br>
+                        &gt; Cleaned Records: 2,450 | Memory: 1.2 MB<br>
+                        &gt; Status: All tests passed with 100% accuracy ✨
+                      </div>
+                    </div>
+                    <div class="preview-caption">
+                      <span>Live Python Lab Simulator</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 3: Modern React Component System -->
+            <article class="showcase-card magnetic" data-magnetic-strength="0.05">
+              <div class="card-header-bar">
+                <div class="browser-dots">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                </div>
+                <span class="project-num">Project 03 / UI Primitives</span>
+                <span class="project-badge-tag">Component Architecture</span>
+              </div>
+
+              <div class="showcase-body">
+                <div class="showcase-info-col">
+                  <span class="project-kicker">⚛️ Modern Frontend</span>
+                  <h3 class="project-title">Modern React Component System</h3>
+                  <h4 class="project-subtitle">Aesthetic, Responsive Glassmorphism UI Components</h4>
+                  <p class="project-description">
+                    Reusable coquette-inspired UI primitives, magnetic buttons, interactive badges, and responsive layouts powered by React & Vite. Engineered with modularity, type safety, and effortless theming.
+                  </p>
+
+                  <div class="project-highlights">
+                    <div class="highlight-item">
+                      <span class="h-icon">🎨</span>
+                      <span>Modular glassmorphic primitives with CSS variable tokenization</span>
+                    </div>
+                    <div class="highlight-item">
+                      <span class="h-icon">🧲</span>
+                      <span>Self-contained magnetic hover hooks and spring-back physics</span>
+                    </div>
+                    <div class="highlight-item">
+                      <span class="h-icon">📱</span>
+                      <span>100% responsive Bento grid layouts across all breakpoints</span>
+                    </div>
+                  </div>
+
+                  <div class="project-tags">
+                    <span class="tag">React</span>
+                    <span class="tag">Vite</span>
+                    <span class="tag">Glassmorphism</span>
+                    <span class="tag">Responsive UI/UX</span>
+                  </div>
+
+                  <div class="project-links">
+                    <button type="button" class="btn-project-action magnetic interactive-pill-btn" data-magnetic-strength="0.2">
+                      <span>Click to Test Component State</span>
+                      <span class="btn-arrow">💖</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Interactive Component Sandbox Preview -->
+                <div class="showcase-preview-col">
+                  <div class="interactive-preview-box component-sandbox">
+                    <div class="sandbox-inner">
+                      <div class="sandbox-card-preview">
+                        <div class="sandbox-tag-pill">
+                          <span>🎀</span> <span>&lt;CoquetteCard /&gt;</span>
+                        </div>
+                        <h5 class="sandbox-sample-title">Jana's Theme Component</h5>
+                        <p class="sandbox-sample-sub">Live interactive state tracker</p>
+                        <div class="sandbox-interactive-row">
+                          <button class="sandbox-btn-heart" id="sandbox-counter-btn">
+                            <span class="btn-heart-emoji">💖</span>
+                            <span class="btn-heart-count" id="heart-count-display">Love it: 42</span>
+                          </button>
+                          <span class="sandbox-state-badge" id="sandbox-state-badge">Active State</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="preview-caption">
+                      <span>Interactive Live React Sandbox Primitive</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= DIRECT CONTACT & CONNECT SECTION ================= -->
+      <section id="contact" class="section contact-section" aria-label="Contact Jana Soliman">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-tag magnetic" data-magnetic-strength="0.1">
+              <span class="tag-icon">💌</span>
+              <span>Say Hello</span>
+            </div>
+            <h2 class="section-title">
+              Let's Build Something <span class="text-gradient">Gorgeous</span> Together
+            </h2>
+            <p class="section-subtitle">
+              Have a web development project, internship opportunity, or creative collaboration in mind? Reach out directly via call, WhatsApp, or email!
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <!-- Left Column: Direct Contact Info & Action Cards -->
+            <div class="contact-cards-col">
+              <!-- Contact Card 1: WhatsApp (Primary) -->
+              <div class="contact-pill-card magnetic" data-magnetic-strength="0.1">
+                <div class="c-card-icon-wrap icon-whatsapp">
+                  <span class="c-icon">💬</span>
+                </div>
+                <div class="c-card-info">
+                  <span class="c-label">Direct WhatsApp (Fastest Response)</span>
+                  <a href="https://wa.me/201151194520" target="_blank" rel="noopener noreferrer" class="c-value">
+                    +20 115 119 4520
+                  </a>
+                  <span class="c-sub">Active throughout the day · Instant Chat</span>
+                </div>
+                <div class="c-card-actions">
+                  <a href="https://wa.me/201151194520" target="_blank" rel="noopener noreferrer" class="btn-c-action magnetic" title="Open WhatsApp" data-magnetic-strength="0.2">
+                    <span>Chat</span>
+                    <span>→</span>
+                  </a>
+                  <button type="button" class="btn-c-copy magnetic copy-btn" data-copy="01151194520" title="Copy Number" data-magnetic-strength="0.2">
+                    <span>📋</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Contact Card 2: Phone Call -->
+              <div class="contact-pill-card magnetic" data-magnetic-strength="0.1">
+                <div class="c-card-icon-wrap icon-phone">
+                  <span class="c-icon">📞</span>
+                </div>
+                <div class="c-card-info">
+                  <span class="c-label">Direct Phone Call</span>
+                  <a href="tel:01151194520" class="c-value">
+                    01151194520
+                  </a>
+                  <span class="c-sub">Voice calls & SMS</span>
+                </div>
+                <div class="c-card-actions">
+                  <a href="tel:01151194520" class="btn-c-action magnetic" title="Call Now" data-magnetic-strength="0.2">
+                    <span>Call</span>
+                    <span>→</span>
+                  </a>
+                  <button type="button" class="btn-c-copy magnetic copy-btn" data-copy="01151194520" title="Copy Phone Number" data-magnetic-strength="0.2">
+                    <span>📋</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Contact Card 3: Email -->
+              <div class="contact-pill-card magnetic" data-magnetic-strength="0.1">
+                <div class="c-card-icon-wrap icon-email">
+                  <span class="c-icon">✉️</span>
+                </div>
+                <div class="c-card-info">
+                  <span class="c-label">Official Email</span>
+                  <a href="mailto:Janamo16108@gmail.com" class="c-value email-value">
+                    Janamo16108@gmail.com
+                  </a>
+                  <span class="c-sub">Academic & professional inquiries</span>
+                </div>
+                <div class="c-card-actions">
+                  <a href="mailto:Janamo16108@gmail.com" class="btn-c-action magnetic" title="Send Email" data-magnetic-strength="0.2">
+                    <span>Email</span>
+                    <span>→</span>
+                  </a>
+                  <button type="button" class="btn-c-copy magnetic copy-btn" data-copy="Janamo16108@gmail.com" title="Copy Email Address" data-magnetic-strength="0.2">
+                    <span>📋</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- University Affiliation Mini Card -->
+              <div class="university-affiliation-card">
+                <div class="u-icon">🎓</div>
+                <div class="u-details">
+                  <span class="u-title">Helwan National University (HNU)</span>
+                  <span class="u-sub">Faculty of Computer Science & Information Technology</span>
+                  <span class="u-status">📍 Cairo / Helwan, Egypt</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Interactive Coquette Love Note / Direct Message Form -->
+            <div class="contact-form-col">
+              <div class="coquette-message-card">
+                <div class="form-card-glow"></div>
+                <div class="form-header">
+                  <span class="form-bow">🎀</span>
+                  <h3 class="form-title">Send Jana a Note</h3>
+                  <p class="form-subtitle">Drop a quick message or inquiry — directly connected to Jana.</p>
+                </div>
+
+                <form id="contact-form" class="coquette-form" onsubmit="event.preventDefault(); window.handleFormSubmit();">
+                  <div class="form-group">
+                    <label for="form-name" class="form-label">
+                      <span>Your Name</span>
+                      <span class="label-heart">💖</span>
+                    </label>
+                    <input type="text" id="form-name" required placeholder="e.g. Sarah Connor" class="form-input">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-email" class="form-label">
+                      <span>Your Email or Phone</span>
+                      <span class="label-heart">✨</span>
+                    </label>
+                    <input type="text" id="form-email" required placeholder="e.g. sarah@example.com or 010..." class="form-input">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="form-message" class="form-label">
+                      <span>Your Idea or Message</span>
+                      <span class="label-heart">💌</span>
+                    </label>
+                    <textarea id="form-message" rows="4" required placeholder="Tell Jana about your project, idea, or just say hello..." class="form-textarea"></textarea>
+                  </div>
+
+                  <button type="submit" class="btn-submit-coquette magnetic" data-magnetic-strength="0.25" id="form-submit-btn">
+                    <span class="btn-sparkle">✨</span>
+                    <span>Send via WhatsApp / Direct Message</span>
+                    <span class="btn-bow">🎀</span>
+                  </button>
+                </form>
+
+                <div id="form-success-banner" class="form-success-banner" style="display: none;">
+                  <span class="success-heart">💖</span>
+                  <span>Thank you! Redirecting to WhatsApp to send your message...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FOOTER ================= -->
+      <footer class="site-footer">
+        <div class="container footer-container">
+          <div class="footer-top-row">
+            <div class="footer-brand">
+              <span class="brand-ribbon">🎀</span>
+              <span class="brand-name">Jana Soliman</span>
+              <span class="brand-arabic">جنى سليمان</span>
+            </div>
+            <div class="footer-tagline">
+              ✨ Computer Science & IT @ Helwan National University (HNU) ✨
+            </div>
+            <div class="footer-nav">
+              <a href="#hero">Home</a>
+              <a href="#about">About</a>
+              <a href="#skills">Skills</a>
+              <a href="#showcase">Showcase</a>
+              <a href="#contact">Contact</a>
+            </div>
+          </div>
+
+          <div class="footer-divider"></div>
+
+          <div class="footer-bottom-row">
+            <p class="copyright-text">
+              Designed & Crafted with <span class="heart-pulse">💖</span>, <span class="cherry-pulse">🍒</span> & coquette aesthetics by <strong>Jana Soliman</strong> · © 2026. All rights reserved.
+            </p>
+            <div class="footer-badge">
+              <span>60fps GSAP · Lenis · Velvet Cherry</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Cute Floating Toast Notification -->
+  <div id="toast" class="coquette-toast" role="alert" aria-live="polite">
+    <span class="toast-ribbon">🎀</span>
+    <span class="toast-message" id="toast-message">Copied to clipboard! 💖</span>
+  </div>
+
+  <!-- CDN Scripts: GSAP 3, ScrollTrigger, Lenis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <!-- Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>

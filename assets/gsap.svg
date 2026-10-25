@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="gsap-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#88CE02"/>
+      <stop offset="100%" stop-color="#0AE448"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="22" fill="#111111"/>
+  <path d="M22 68 C 16 54 22 36 38 32 C 48 30 56 35 60 42 C 64 50 62 60 54 66 C 46 72 34 72 26 68 Z" fill="none" stroke="url(#gsap-grad)" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="66" cy="44" r="6" fill="#88CE02"/>
+  <text x="50%" y="88%" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-weight="bold" font-size="14" letter-spacing="1">GSAP</text>
+</svg>
