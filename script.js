@@ -94,7 +94,9 @@ function initAmbientHearts() {
   const container = document.getElementById('ambient-hearts');
   if (!container) return;
 
-  const heartCount = 18;
+  const isMobile = window.innerWidth <= 768;
+  const heartCount = isMobile ? 8 : 18;
+  const sparkleCount = isMobile ? 5 : 12;
   const colors = [
     'url(#cherryHeartGrad)',
     'url(#softBlushGrad)',
@@ -163,8 +165,8 @@ function initAmbientHearts() {
     }
   }
 
-  // Add 12 ambient 4-point sparkles
-  for (let s = 0; s < 12; s++) {
+  // Add ambient 4-point sparkles (tuned for mobile/desktop performance)
+  for (let s = 0; s < sparkleCount; s++) {
     const sparkle = document.createElement('div');
     sparkle.className = 'ambient-sparkle';
     sparkle.textContent = '✦';
@@ -183,7 +185,7 @@ function initHeartCursor() {
   if (!cursor) return;
 
   // Check if touch device
-  if (window.matchMedia('(pointer: coarse)').matches) {
+  if (window.matchMedia('(hover: none) and (pointer: coarse)').matches || window.matchMedia('(pointer: coarse)').matches) {
     cursor.style.display = 'none';
     return;
   }
@@ -608,42 +610,45 @@ function initMagneticPhysics() {
    ========================================================================== */
 function initSkillCardBursts() {
   const cards = document.querySelectorAll('.skill-card');
+  const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
   cards.forEach((card) => {
-    // 3D Card Tilt
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+    // 3D Card Tilt (desktop only for locked 60fps)
+    if (!isTouch) {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
+        const rotateX = ((y - centerY) / centerY) * -10;
+        const rotateY = ((x - centerX) / centerX) * 10;
 
-      if (typeof gsap !== 'undefined') {
-        gsap.to(card, {
-          rotationX: rotateX,
-          rotationY: rotateY,
-          transformPerspective: 800,
-          duration: 0.3,
-          ease: 'power1.out',
-          force3D: true,
-        });
-      }
-    });
+        if (typeof gsap !== 'undefined') {
+          gsap.to(card, {
+            rotationX: rotateX,
+            rotationY: rotateY,
+            transformPerspective: 800,
+            duration: 0.3,
+            ease: 'power1.out',
+            force3D: true,
+          });
+        }
+      });
 
-    card.addEventListener('mouseleave', () => {
-      if (typeof gsap !== 'undefined') {
-        gsap.to(card, {
-          rotationX: 0,
-          rotationY: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-          force3D: true,
-        });
-      }
-    });
+      card.addEventListener('mouseleave', () => {
+        if (typeof gsap !== 'undefined') {
+          gsap.to(card, {
+            rotationX: 0,
+            rotationY: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            force3D: true,
+          });
+        }
+      });
+    }
 
     // Heart Burst on Hover (Radiates 6-8 miniature hearts)
     let hasBurstRecently = false;
