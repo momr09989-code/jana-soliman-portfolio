@@ -99,9 +99,10 @@ function initAmbientHearts() {
     'url(#cherryHeartGrad)',
     'url(#softBlushGrad)',
     'url(#glowGlowGrad)',
-    '#FF4D6D',
-    '#FFB3C1',
-    '#D91636'
+    '#FFB6C1',
+    '#FF8DA1',
+    '#FFC2D1',
+    '#FFFFFF'
   ];
 
   for (let i = 0; i < heartCount; i++) {
@@ -234,7 +235,7 @@ function initHeartCursor() {
 }
 
 function spawnMiniHeart(x, y, count = 1) {
-  const colors = ['#FF4D6D', '#FFB3C1', '#D91636', '#FFF0F3'];
+  const colors = ['#FFB6C1', '#FF8DA1', '#FFC2D1', '#FFFFFF'];
 
   for (let i = 0; i < count; i++) {
     const heart = document.createElement('div');
@@ -655,7 +656,7 @@ function initSkillCardBursts() {
       const burstContainer = card.querySelector('.skill-burst-container');
       if (!burstContainer) return;
 
-      const colors = ['#FF4D6D', '#FFB3C1', '#D91636', '#FFF0F3'];
+      const colors = ['#FFB6C1', '#FF8DA1', '#FFC2D1', '#FFFFFF'];
       const burstCount = Math.floor(Math.random() * 3) + 6;
 
       for (let i = 0; i < burstCount; i++) {
